@@ -1,0 +1,75 @@
+{
+	"night": {
+		"0": {
+			"temperature": "",
+			"feels-like": "",
+			"pressure": "",
+			"humidity": "",
+			"wind": "",
+			"precipitation": ""
+		},
+		"3": {
+			"temperature": "",
+			"feels-like": "",
+			"pressure": "",
+			"humidity": "",
+			"wind": "",
+			"precipitation": ""
+		}
+	},
+	"morning": {
+		"6": {
+			"temperature": "",
+			"feels-like": "",
+			"pressure": "",
+			"humidity": "",
+			"wind": "",
+			"precipitation": ""
+		},
+		"9": {
+			"temperature": "",
+			"feels-like": "",
+			"pressure": "",
+			"humidity": "",
+			"wind": "",
+			"precipitation": ""
+		}
+	},
+	"day": {
+		"12": {
+			"temperature": "",
+			"feels-like": "",
+			"pressure": "",
+			"humidity": "",
+			"wind": "",
+			"precipitation": ""
+		},
+		"15": {
+			"temperature": "",
+			"feels-like": "",
+			"pressure": "",
+			"humidity": "",
+			"wind": "",
+			"precipitation": ""
+		}
+	},
+	"evening": {
+		"18": {
+			"temperature": "",
+			"feels-like": "",
+			"pressure": "",
+			"humidity": "",
+			"wind": "",
+			"precipitation": ""
+		},
+		"21": {
+			"temperature": "",
+			"feels-like": "",
+			"pressure": "",
+			"humidity": "",
+			"wind": "",
+			"precipitation": ""
+		}
+	}
+
+}
