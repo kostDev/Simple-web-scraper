@@ -8,6 +8,7 @@ var fs = require('fs');
 // takes some info about weather
 // my city : Kiev
 var pageToVisit = "https://sinoptik.ua/погода-киев";
+console.log("Visiting page " + pageToVisit);
 
 var dateObj = new Date();
 var monthNow = dateObj.getUTCMonth() + 1; //months from 1-12
@@ -21,7 +22,7 @@ function getDays(dayNow){
   var d = [];
   for (var i = 0; i <= 4; i++) {
       d[i] = dayNow + i;
-      console.log(d[i]);
+      //console.log(d[i]);
   }
   return d;
 }
@@ -40,9 +41,6 @@ function getAddresses(page, days){
 
 var addresses = getAddresses(pageToVisit, days);
 
-
-console.log("Visiting page " + pageToVisit);
-
 request(pageToVisit, function(error, response, body) {
    if(error) {
      console.log("Error: " + error);
@@ -52,18 +50,20 @@ request(pageToVisit, function(error, response, body) {
    if(response.statusCode === 200){
      // Parse the document body
      var $ = cheerio.load(body);
-     console.log("Page title:  " + $('title').text());
+     var siteTitle = $('title').text();
+     console.log("Page title:  " + siteTitle.substring(0,8)+"...");
      //div#wrapper> div#content > div#leftCol > div#mainContentBlock > div#blockDays > div.tabsContent
      $("div#wrapper").each(function( index ){
     	var info = $(this).find('div.rSide > table.weatherDetails').text().trim();
       var day  = $(this).find('div#bd1 > p.date').text().trim();
       var month  = $(this).find('div#bd1 > p.month').text().trim();
-
       // =====================
-      console.log(day+' '+ month + "\n" + info);
+      if(!info){
+        console.log("nothing =_= | check u code!");
+      }
     	// delete txt if exist
     	fs.unlink("./sinoptik.txt",function(err){
-    		if(!err) console.log('');
+    		if(!err) console.log('update file: sinoptik.txt');
     	});
     	// create txt and add info
     	fs.appendFileSync('sinoptik.txt', info);
