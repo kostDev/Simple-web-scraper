@@ -14,21 +14,20 @@ var dateInfo = {
   monthNow : dateObj.getUTCMonth() + 1, //months from 1-12
   dayNow : dateObj.getUTCDate(),
   yearNow : dateObj.getUTCFullYear(),
-  address : "/-"+this.yearNow+"-"+this.monthNow+"-"+this.dayNow
-};
-
-function getAddresses(){
-  var arr = [];
-  // for 5 addresses
-  var maxLength = 4;
-  for (var i = 0; i <= maxLength; i++) {
-    arr[i] = pageToVisit + "/" + dateInfo.yearNow + "-"+dateInfo.monthNow +"-" + (dateInfo.dayNow + i);
-    console.log(arr[i]);
+  getCurrentAddress : () => "/-"+this.yearNow+"-"+this.monthNow+"-"+this.dayNow,
+  getFiveDaysAddresses: () => {
+    var arr = [];
+    // for 5 addresses
+    var maxLength = 4;
+    for(var i = 0; i <= maxLength; i++){
+      arr[i] = pageToVisit + "/" + dateInfo.yearNow + "-"+dateInfo.monthNow +"-" + (dateInfo.dayNow + i);
+      console.log(arr[i]);
+    }
+    return arr;
   }
-  return arr;
-}
-
-var addresses = getAddresses();
+};
+//console.log(dateInfo.getCurrentAddress());
+var addresses = dateInfo.getFiveDaysAddresses();
 
 request(pageToVisit, function(error, response, body) {
    if(error) {
