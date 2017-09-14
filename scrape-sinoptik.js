@@ -2,44 +2,33 @@ var request = require('request');
 var cheerio = require('cheerio');
 var URL = require('url-parse');
 var fs = require('fs');
-
+var dateObj = new Date();
 
 //here a site for examle
 // takes some info about weather
 // my city : Kiev
 var pageToVisit = "https://sinoptik.ua/погода-киев";
 console.log("Visiting page " + pageToVisit);
+// obj info for current day
+var dateInfo = {
+  monthNow : dateObj.getUTCMonth() + 1, //months from 1-12
+  dayNow : dateObj.getUTCDate(),
+  yearNow : dateObj.getUTCFullYear(),
+  address : "/-"+this.yearNow+"-"+this.monthNow+"-"+this.dayNow
+};
 
-var dateObj = new Date();
-var monthNow = dateObj.getUTCMonth() + 1; //months from 1-12
-var dayNow = dateObj.getUTCDate();
-var yearNow = dateObj.getUTCFullYear();
-var address = "/-"+yearNow+"-"+monthNow+"-"+dayNow;
-// dn = getDayNow
-
-
-function getDays(dayNow){
-  var d = [];
-  for (var i = 0; i <= 4; i++) {
-      d[i] = dayNow + i;
-      //console.log(d[i]);
-  }
-  return d;
-}
-
-var days = getDays(dayNow);
-
-function getAddresses(page, days){
+function getAddresses(){
   var arr = [];
-  for (var i = 0; i < days.length; i++) {
-    arr[i] = page + "/" + yearNow + "-"+monthNow +"-" +days[i];
+  // for 5 addresses
+  var maxLength = 4;
+  for (var i = 0; i <= maxLength; i++) {
+    arr[i] = pageToVisit + "/" + dateInfo.yearNow + "-"+dateInfo.monthNow +"-" + (dateInfo.dayNow + i);
     console.log(arr[i]);
   }
   return arr;
 }
 
-
-var addresses = getAddresses(pageToVisit, days);
+var addresses = getAddresses();
 
 request(pageToVisit, function(error, response, body) {
    if(error) {
